@@ -23,9 +23,10 @@ Este repositório demonstra como processar dados enviados para o Amazon S3 em te
 1. Arquivos são enviados para o Amazon S3.
 2. O S3 dispara eventos para o AWS Lambda.
 3. O Lambda processa os dados, armazena no DynamoDB ou envia notificações via SNS.
-4. Dados são analisados no QuickSight.  
-
+4. Dados são analisados no QuickSight.
+   
 ![Topologia do Sistema](./images/topologia.jpg)
+
 
 ## 📂 Organização  
 - `/code`: Código da função Lambda.
