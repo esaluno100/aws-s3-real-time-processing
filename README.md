@@ -25,7 +25,7 @@ Este repositório demonstra como processar dados enviados para o Amazon S3 em te
 3. O Lambda processa os dados, armazena no DynamoDB ou envia notificações via SNS.
 4. Dados são analisados no QuickSight.
    
-![Topologia do Sistema](./images/topologia.jpg)
+![Topologia do Sistema](toplogia.jpg)
 
 
 ## 📂 Organização  
@@ -41,7 +41,7 @@ Este repositório demonstra como processar dados enviados para o Amazon S3 em te
 
 Explore este repositório e implemente o sistema em seu ambiente! 😊
 
-├── /images
+├── Imagem da Toplogia
 │   └── topologia.jpg
 ├── /code
 │   ├── lambda_function.py
