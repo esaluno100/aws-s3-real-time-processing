@@ -45,6 +45,44 @@ Explore este repositório e implemente o sistema em seu ambiente! 😊
 │   └── topologia.jpg
 ├── /code
 │   ├── lambda_function.py
+import boto3
+import json
+
+def lambda_handler(event, context):
+    s3 = boto3.client('s3')
+    dynamodb = boto3.resource('dynamodb')
+    sns = boto3.client('sns')
+
+    # Bucket e objeto
+    bucket_name = event['Records'][0]['s3']['bucket']['name']
+    file_name = event['Records'][0]['s3']['object']['key']
+
+    # Leitura do arquivo
+    obj = s3.get_object(Bucket=bucket_name, Key=file_name)
+    data = obj['Body'].read().decode('utf-8')
+
+    # Processamento dos dados
+    processed_data = {"file_name": file_name, "content_length": len(data)}
+
+    # Salvando no DynamoDB
+    table = dynamodb.Table('ProcessedFiles')
+    table.put_item(Item=processed_data)
+
+    # Enviando notificação
+    sns.publish(
+        TopicArn='arn:aws:sns:us-east-1:123456789012:FileProcessingTopic',
+        Message=f"Arquivo {file_name} processado com sucesso!",
+        Subject="Processamento de Arquivo"
+    )
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Processamento concluído!')
+    }
+
 │   └── requirements.txt
+boto3
+
 ├── /presentation
-│   └── apresentacao.pdf
+### Apresentação da aplicação com a idéia de estar consumindo dados do s3, como ela processa em tempo de recebimento do s3.   
+│   └── [Página criada para demonstrar funcionamento](https://processamento-dados-s3-ty81tol.gamma.site/)
